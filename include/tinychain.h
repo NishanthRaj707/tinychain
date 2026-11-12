@@ -16,7 +16,7 @@ typedef enum{
 }tc_status_t;
 
 typedef enum{
-    TC_DTYPE_32=0,
+    TC_DTYPE_F32=0,
     TC_DTYPE_I8
 }tc_dtype_t;
 
@@ -54,6 +54,7 @@ typedef struct{
 
     float scale;
     int32_t zero_point;
+    tc_dtype_t dtype
 
     size_t node_count;
     uint16_t _last_argmax_idx;
