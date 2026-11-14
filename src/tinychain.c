@@ -151,5 +151,31 @@ tc_status_t tc_run(tc_handle_t* h)
         }
     }
 
+    for(uint16_t i=0;i<h->num_nodes;i++)
+    {
+        tc_node_t* n = &(h->num_nodes[i]);
 
+        if(n->op == (uint8_t)TC_OP_DISABLED)
+        {
+            continue;
+        }
+
+        float val = tc_read_val(n,i);
+        if(tc_check_op(n,i,v,max_idx))
+        {
+            if(n->action == NULL)
+            {
+                return TC_ERR_NULL_PTR;
+            }
+            actions_fired += n->action(i,val,n->user_ctx);
+
+        }
+        else{
+            n->_current_streak = 0U;
+            n->_has_fired=false;
+        }
+    }
+    h->eval_cycles++;
+    return actions_fired;
 }
+

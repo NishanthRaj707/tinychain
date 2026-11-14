@@ -31,7 +31,7 @@ typedef enum{
 typedef void (*tc_node_cb)(uint16_t node_id,float val,void* user_data);
 
 typedef struct{
-    tc_op_t op;
+    uint8_t op;
     float threshold_min;
     float threshold max;
     tc_node_cb callback;
@@ -54,7 +54,7 @@ typedef struct{
 
     float scale;
     int32_t zero_point;
-    tc_dtype_t dtype
+    uint8_t dtype
 
     size_t node_count;
     uint16_t _last_argmax_idx;
